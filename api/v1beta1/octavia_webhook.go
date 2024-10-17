@@ -194,7 +194,7 @@ func (r *OctaviaSpecCore) ValidateUpdate(old OctaviaSpecCore, basePath *field.Pa
 func (r *Octavia) ValidateDelete() (admission.Warnings, error) {
 	octavialog.Info("validate delete", "name", r.Name)
 
-	// TODO(user): fill in your validation logic upon object deletion.
+	// TODO(user): fill  in your validation logic upon object deletion.
 	return nil, nil
 }
 
