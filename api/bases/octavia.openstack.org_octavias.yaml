@@ -150,6 +150,10 @@ spec:
                 description: OctaviaAPI - Spec definition for the API service of the
                   Octavia deployment
                 properties:
+                  apiTimeout:
+                    description: APITimeout for HAProxy and Apache defaults to OctaviaSpecCore
+                      APITimeout (seconds)
+                    type: string
                   containerImage:
                     description: Octavia Container Image URL
                     type: string

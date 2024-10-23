@@ -141,6 +141,10 @@ type OctaviaAPISpecCore struct {
 	// +operator-sdk:csv:customresourcedefinitions:type=spec
 	// TLS - Parameters related to the TLS
 	TLS OctaviaApiTLS `json:"tls,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	// APITimeout for HAProxy and Apache defaults to OctaviaSpecCore APITimeout (seconds)
+	APITimeout string `json:"apiTimeout,omitempty"`
 }
 
 type OctaviaApiTLS struct {
