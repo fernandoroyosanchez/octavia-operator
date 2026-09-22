@@ -1,0 +1,44 @@
+---
+- job:
+    name: octavia-operator-tempest-multinode
+    parent: podified-multinode-edpm-deployment-crc
+    dependencies: ["openstack-k8s-operators-content-provider"]
+    irrelevant-files:
+      - .*/*.md
+      - ^.github/.*$
+      - .ci-operator.yaml
+      - .dockerignore
+      - .gitignore
+      - .golangci.yaml
+      - .pre-commit-config.yaml
+      - .prow_ci.env
+      - ^LICENSE.*$
+      - ^OWNERS$
+      - ^OWNERS_ALIASES$
+      - ^PROJECT$
+      - .*go.(mod|sum|work).*
+      - ^kuttl-test.yaml$
+      - ^renovate.json$
+      - ^config/samples/.*$
+      - ^docs?/.*
+      - ^hack/.*$
+      - ^tests?/functional/.*$
+      - ^tests?/kuttl/.*$
+      - ^zuul.d/jobs.yaml
+    vars:
+      cifmw_edpm_deploy_nova_compute_extra_config: |
+        [DEFAULT]
+        force_config_drive = false
+      cifmw_test_operator_tempest_container: openstack-tempest-all
+      cifmw_run_test_role: test_operator
+      cifmw_test_operator_tempest_network_attachments:
+        - ctlplane
+      cifmw_test_operator_tempest_tempestconf_config:
+          overrides: |
+            compute-feature-enabled.vnc_console true
+            validation.run_validation true
+            identity.v3_endpoint_type public
+            identity.v2_admin_endpoint_type public
+      cifmw_test_operator_tempest_include_list: |
+        octavia_tempest_plugin.api
+        octavia_tempest_plugin.scenario
